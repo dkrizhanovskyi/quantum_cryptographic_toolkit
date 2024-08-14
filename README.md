@@ -1,5 +1,7 @@
    # Quantum Cryptographic Toolkit
 
+   [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13317139.svg)](https://doi.org/10.5281/zenodo.13317139)
+
    ## Description
    The Quantum Cryptographic Toolkit is a collection of tools and libraries written in Rust, designed to develop, test, and deploy quantum-resistant cryptographic algorithms.
 
