@@ -1,0 +1,16 @@
+# Ignoring target directory
+/target/
+
+# Ignoring temporary files
+*.rs.bk
+*.swp
+
+# Ignoring compiled binaries
+*.exe
+*.dll
+*.dylib
+*.so
+
+# Ignoring IDE-specific files
+.idea/
+.vscode/

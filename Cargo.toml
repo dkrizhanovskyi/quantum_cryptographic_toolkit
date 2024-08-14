@@ -1,0 +1,20 @@
+[package]
+name = "quantum_cryptographic_toolkit"
+version = "0.1.0"
+edition = "2021"
+
+# Authors of the project
+authors = ["Daniil Krizhanovskyi <daniil.krizhanovskyi@hotmail.com>"]
+description = "A toolkit for developing, testing, and deploying quantum-resistant cryptographic algorithms."
+license = "MIT"
+repository = "https://github.com/dkrithanovskyi/quantum_cryptographic_toolkit"
+homepage = "https://github.com/dkrithanovskyi/quantum_cryptographic_toolkit"
+documentation = "https://docs.rs/quantum_cryptographic_toolkit"
+keywords = ["cryptography", "quantum", "post-quantum", "rust"]
+categories = ["cryptography", "security"]
+
+[dependencies]
+# Add any required dependencies here
+
+[dev-dependencies]
+# Dependencies for testing
