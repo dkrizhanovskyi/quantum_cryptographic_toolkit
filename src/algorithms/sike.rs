@@ -30,7 +30,6 @@ impl Sike {
         }
         result
     }
-    
 
     /// Example function to demonstrate key decapsulation.
     ///
@@ -43,6 +42,12 @@ impl Sike {
     /// A vector of bytes representing the decapsulated key.
     pub fn decapsulate(&self, encapsulated_key: &[u8]) -> Vec<u8> {
         encapsulated_key.to_vec()
+    }
+}
+
+impl Default for Sike {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

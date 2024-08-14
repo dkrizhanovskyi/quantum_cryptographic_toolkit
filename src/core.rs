@@ -1,5 +1,5 @@
 use crate::profiling::Profiler;
-use crate::algorithms::{newhope::NewHope, sphincs::Sphincs, mceliece::McEliece, sike::Sike, new_algorithm::NewAlgorithm};
+use crate::algorithms::{newhope::NewHope, sphincs::Sphincs, mceliece::McEliece, sike::Sike, new_algorithm::NewAlgorithm, new_algorithm_advanced::AdvancedAlgorithm};
 
 pub struct CryptoToolkit {
     // Core properties or state could be added here if needed later
@@ -61,6 +61,14 @@ impl CryptoToolkit {
             let _encapsulated_key = sike.encapsulate();
         });
         println!("SIKE key encapsulation execution time: {} ms", sike_duration);
+
+        // Profile AdvancedAlgorithm encryption
+        let advanced_algorithm_duration = Profiler::profile_execution_time(|| {
+            let advanced_algorithm = AdvancedAlgorithm::new();
+            let plaintext = vec![1, 2, 3, 4];
+            let _ciphertext = advanced_algorithm.encrypt(&plaintext);
+        });
+        println!("AdvancedAlgorithm encryption execution time: {} ms", advanced_algorithm_duration);
     }
 
     /// Profile the execution time of the new algorithm.
@@ -71,6 +79,19 @@ impl CryptoToolkit {
             let _output_data = algorithm.process_data(&input_data);
         });
         println!("NewAlgorithm processing execution time: {} ms", new_algorithm_duration);
+
+        let advanced_algorithm_duration = Profiler::profile_execution_time(|| {
+            let advanced_algorithm = AdvancedAlgorithm::new();
+            let input_data = vec![1, 2, 3, 4];
+            let _output_data = advanced_algorithm.process_data(&input_data);
+        });
+        println!("AdvancedAlgorithm processing execution time: {} ms", advanced_algorithm_duration);
+    }
+}
+
+impl Default for CryptoToolkit {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -88,5 +109,11 @@ mod tests {
     fn test_new_algorithm_profiling() {
         let toolkit = CryptoToolkit::new();
         toolkit.profile_new_algorithm();
+    }
+
+    #[test]
+    fn test_advanced_algorithm_demo() {
+        let toolkit = CryptoToolkit::new();
+        toolkit.run_algorithm_demo();
     }
 }

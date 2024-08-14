@@ -4,6 +4,7 @@ pub struct McEliece {
 }
 
 impl McEliece {
+    /// Initializes a new McEliece instance with generated keys.
     pub fn new() -> Self {
         McEliece {
             public_key: vec![0; 128],
@@ -11,6 +12,15 @@ impl McEliece {
         }
     }
 
+    /// Encrypts the given plaintext using the McEliece algorithm.
+    ///
+    /// # Arguments
+    ///
+    /// * `plaintext` - A byte slice representing the data to be encrypted.
+    ///
+    /// # Returns
+    ///
+    /// A vector of bytes representing the encrypted data.
     pub fn encrypt(&self, plaintext: &[u8]) -> Vec<u8> {
         let mut result: Vec<u8> = plaintext.to_vec();
         for _ in 0..10000 {
@@ -19,12 +29,27 @@ impl McEliece {
         result
     }
 
+    /// Decrypts the given ciphertext using the McEliece algorithm.
+    ///
+    /// # Arguments
+    ///
+    /// * `ciphertext` - A byte slice representing the data to be decrypted.
+    ///
+    /// # Returns
+    ///
+    /// A vector of bytes representing the decrypted data.
     pub fn decrypt(&self, ciphertext: &[u8]) -> Vec<u8> {
         let mut result: Vec<u8> = ciphertext.to_vec();
         for _ in 0..10000 {
             result.iter_mut().for_each(|x| *x = x.wrapping_sub(1));
         }
         result
+    }
+}
+
+impl Default for McEliece {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

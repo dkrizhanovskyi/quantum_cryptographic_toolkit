@@ -4,6 +4,7 @@ pub struct Sphincs {
 }
 
 impl Sphincs {
+    /// Initializes a new SPHINCS+ instance with generated keys.
     pub fn new() -> Self {
         Sphincs {
             private_key: vec![0; 64],
@@ -11,6 +12,15 @@ impl Sphincs {
         }
     }
 
+    /// Signs the given message using the SPHINCS+ algorithm.
+    ///
+    /// # Arguments
+    ///
+    /// * `message` - A byte slice representing the message to be signed.
+    ///
+    /// # Returns
+    ///
+    /// A vector of bytes representing the signature.
     pub fn sign(&self, message: &[u8]) -> Vec<u8> {
         let mut result: Vec<u8> = message.to_vec();
         for _ in 0..10000 {
@@ -19,10 +29,26 @@ impl Sphincs {
         result
     }
 
+    /// Verifies the given signature using the SPHINCS+ algorithm.
+    ///
+    /// # Arguments
+    ///
+    /// * `message` - A byte slice representing the original message.
+    /// * `signature` - A byte slice representing the signature to be verified.
+    ///
+    /// # Returns
+    ///
+    /// A boolean indicating whether the signature is valid.
     pub fn verify(&self, message: &[u8], signature: &[u8]) -> bool {
         // Reapply the signing process to see if we get the same signature
         let expected_signature = self.sign(message);
         expected_signature == signature
+    }
+}
+
+impl Default for Sphincs {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

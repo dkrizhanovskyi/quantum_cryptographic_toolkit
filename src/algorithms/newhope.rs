@@ -34,6 +34,12 @@ impl NewHope {
     }
 }
 
+impl Default for NewHope {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

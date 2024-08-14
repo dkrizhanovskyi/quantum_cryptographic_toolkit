@@ -1,12 +1,9 @@
-/// Quantum-resistant cryptographic algorithms.
-/// 
-/// This module contains various quantum-resistant cryptographic algorithms.
-
 pub mod newhope;
 pub mod sphincs;
 pub mod mceliece;
 pub mod sike;
 pub mod new_algorithm;
+pub mod new_algorithm_advanced;  // Добавляем новый модуль
 
 pub fn example_algorithm() -> String {
     String::from("This is an example quantum-resistant algorithm.")
