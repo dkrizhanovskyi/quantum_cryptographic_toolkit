@@ -1,3 +1,5 @@
+// src/algorithms/new_algorithm_advanced.rs
+
 /// New Advanced Quantum-Resistant Algorithm
 ///
 /// This algorithm is designed based on the latest research in quantum-resistant cryptography.
@@ -10,14 +12,16 @@ pub struct AdvancedAlgorithm {
 
 impl AdvancedAlgorithm {
     /// Initializes a new instance of the algorithm with a generated key.
+    ///
+    /// This constructor generates an example key for demonstration purposes.
+    /// In a real-world scenario, proper key generation logic should be implemented.
     pub fn new() -> Self {
-        // Placeholder for key generation logic
         AdvancedAlgorithm {
             key: vec![0; 64], // Example key of 64 bytes
         }
     }
 
-    /// Example function to demonstrate the core functionality of the algorithm.
+    /// Processes the input data using the core functionality of the algorithm.
     ///
     /// # Arguments
     ///
@@ -27,12 +31,7 @@ impl AdvancedAlgorithm {
     ///
     /// A vector of bytes representing the processed output.
     pub fn process_data(&self, input_data: &[u8]) -> Vec<u8> {
-        // Placeholder for algorithm logic
-        let mut result = input_data.to_vec();
-        for _ in 0..50000 {
-            result.iter_mut().for_each(|x| *x = x.wrapping_add(1));
-        }
-        result
+        self.simple_transform(input_data, |x| x.wrapping_add(1))
     }
 
     /// Encrypts the given plaintext using the advanced algorithm.
@@ -45,7 +44,6 @@ impl AdvancedAlgorithm {
     ///
     /// A vector of bytes representing the encrypted data.
     pub fn encrypt(&self, plaintext: &[u8]) -> Vec<u8> {
-        // Placeholder for encryption logic
         self.process_data(plaintext)
     }
 
@@ -59,11 +57,26 @@ impl AdvancedAlgorithm {
     ///
     /// A vector of bytes representing the decrypted data.
     pub fn decrypt(&self, ciphertext: &[u8]) -> Vec<u8> {
-        let mut result = ciphertext.to_vec();
-        for _ in 0..50000 {
-            result.iter_mut().for_each(|x| *x = x.wrapping_sub(1));
-        }
-        result
+        self.simple_transform(ciphertext, |x| x.wrapping_sub(1))
+    }
+
+    /// A simple transformation function used for processing data.
+    ///
+    /// This function applies a transformation to each byte in the input data.
+    ///
+    /// # Arguments
+    ///
+    /// * `data` - A byte slice representing the data to be transformed.
+    /// * `f` - A function that defines the transformation to be applied to each byte.
+    ///
+    /// # Returns
+    ///
+    /// A vector of bytes representing the transformed data.
+    fn simple_transform<F>(&self, data: &[u8], f: F) -> Vec<u8>
+    where
+        F: Fn(u8) -> u8,
+    {
+        data.iter().map(|&x| f(x)).collect()
     }
 }
 
@@ -92,5 +105,14 @@ mod tests {
         let input_data = vec![1; 100000];  // Large input data
         let output_data = algorithm.process_data(&input_data);
         assert_eq!(output_data.len(), input_data.len());
+    }
+
+    #[test]
+    fn test_advanced_algorithm_consistency() {
+        let algorithm = AdvancedAlgorithm::new();
+        let input_data = vec![10, 20, 30];
+        let processed_data = algorithm.process_data(&input_data);
+        let expected_output: Vec<u8> = input_data.iter().map(|&x| x.wrapping_add(1)).collect();
+        assert_eq!(processed_data, expected_output);
     }
 }

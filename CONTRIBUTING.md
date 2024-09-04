@@ -9,7 +9,7 @@
    2. **Clone your fork**: Clone your forked repository to your local machine.
 
       ```bash
-      git clone https://github.com/your-username/quantum_cryptographic_toolkit.git
+      git clone https://github.com/dkrizhanovskyi/quantum_cryptographic_toolkit.git
       cd quantum_cryptographic_toolkit
       ```
 

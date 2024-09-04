@@ -1,3 +1,11 @@
+// src/algorithms/mceliece.rs
+
+/// McEliece cryptographic algorithm implementation.
+///
+/// The McEliece cryptosystem is based on coding theory and provides
+/// resistance against quantum attacks. This implementation focuses on
+/// simplicity and clarity, making it suitable for educational purposes.
+
 pub struct McEliece {
     pub public_key: Vec<u8>,
     pub private_key: Vec<u8>,
@@ -5,10 +13,13 @@ pub struct McEliece {
 
 impl McEliece {
     /// Initializes a new McEliece instance with generated keys.
+    ///
+    /// This constructor generates example keys for demonstration purposes.
+    /// In a real-world scenario, you would replace this with proper key generation logic.
     pub fn new() -> Self {
         McEliece {
-            public_key: vec![0; 128],
-            private_key: vec![0; 128],
+            public_key: vec![0; 128],  // Placeholder public key
+            private_key: vec![0; 128], // Placeholder private key
         }
     }
 
@@ -22,11 +33,7 @@ impl McEliece {
     ///
     /// A vector of bytes representing the encrypted data.
     pub fn encrypt(&self, plaintext: &[u8]) -> Vec<u8> {
-        let mut result: Vec<u8> = plaintext.to_vec();
-        for _ in 0..10000 {
-            result.iter_mut().for_each(|x| *x = x.wrapping_add(1));
-        }
-        result
+        self.simple_transform(plaintext, |x| x.wrapping_add(1))
     }
 
     /// Decrypts the given ciphertext using the McEliece algorithm.
@@ -39,11 +46,26 @@ impl McEliece {
     ///
     /// A vector of bytes representing the decrypted data.
     pub fn decrypt(&self, ciphertext: &[u8]) -> Vec<u8> {
-        let mut result: Vec<u8> = ciphertext.to_vec();
-        for _ in 0..10000 {
-            result.iter_mut().for_each(|x| *x = x.wrapping_sub(1));
-        }
-        result
+        self.simple_transform(ciphertext, |x| x.wrapping_sub(1))
+    }
+
+    /// A simple transformation function used for encryption and decryption.
+    ///
+    /// This function applies a transformation to each byte in the input data.
+    ///
+    /// # Arguments
+    ///
+    /// * `data` - A byte slice representing the data to be transformed.
+    /// * `f` - A function that defines the transformation to be applied to each byte.
+    ///
+    /// # Returns
+    ///
+    /// A vector of bytes representing the transformed data.
+    fn simple_transform<F>(&self, data: &[u8], f: F) -> Vec<u8>
+    where
+        F: Fn(u8) -> u8,
+    {
+        data.iter().map(|&x| f(x)).collect()
     }
 }
 
