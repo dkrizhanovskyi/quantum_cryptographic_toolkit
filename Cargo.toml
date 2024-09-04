@@ -11,7 +11,7 @@ repository = "https://github.com/dkrizhanovskyi/quantum_cryptographic_toolkit"
 homepage = "https://github.com/dkrizhanovskyi/quantum_cryptographic_toolkit"
 documentation = "https://docs.rs/quantum_cryptographic_toolkit"
 keywords = ["cryptography", "quantum", "post-quantum", "rust"]
-categories = ["cryptography", "security"]
+categories = ["cryptography"]
 
 [dependencies]
 criterion = "0.5.1"
